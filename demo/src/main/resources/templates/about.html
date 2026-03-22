@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BookClub | About Us</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body>
+
+<!-- Insert the shared header fragment -->
+<div th:insert="~{fragments/header :: header}"></div>
+
+<!-- Main About Us content -->
+<main class="container py-5" style="max-width: 800px;">
+
+    <!-- Page title -->
+    <div class="text-center mb-5">
+        <h1 class="fw-light">About Our Book Club</h1>
+        <p class="lead text-muted">
+            Learn more about who we are and what inspires this community.
+        </p>
+    </div>
+
+    <!-- Section 1: Mission -->
+    <section class="mb-5">
+        <h3 class="fw-bold">Our Mission</h3>
+        <p>
+            The BookClub application was created to bring readers together in a simple,
+            engaging, and organized way. Whether you're discovering new authors,
+            sharing your favorite novels, or participating in monthly reading challenges,
+            our goal is to make your book club experience seamless and enjoyable.
+        </p>
+    </section>
+
+    <!-- Section 2: What We Offer -->
+    <section class="mb-5">
+        <h3 class="fw-bold">What We Offer</h3>
+        <ul>
+            <li>A curated list of top books each month</li>
+            <li>Easy navigation between pages using a clean, modern layout</li>
+            <li>Simple access to contact information and club details</li>
+            <li>A growing platform designed with Spring Boot and Thymeleaf</li>
+        </ul>
+    </section>
+
+    <!-- Section 3: Our Story -->
+    <section class="mb-5">
+        <h3 class="fw-bold">Our Story</h3>
+        <p>
+            This project began as part of a server-side development course, but quickly
+            grew into something more meaningful — a space where readers can connect,
+            explore, and share their love of books. As the application evolves, we hope
+            to continue adding features that support book clubs of all sizes.
+        </p>
+    </section>
+
+</main>
+
+<!-- Insert shared footer and script fragments -->
+<div th:insert="~{fragments/footer :: footer}"></div>
+<div th:insert="~{fragments/scriptFooter :: scriptFooter}"></div>
+
+</body>
+</html>

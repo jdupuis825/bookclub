@@ -1,0 +1,58 @@
+<!--File: view.html-->
+<!--Name: Jocelyn Dupuis-->
+<!--Date: 03/27/2026-->
+<!--Description: view file for BookClub application-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body>
+
+<!-- Header fragment -->
+<div th:insert="~{fragments/header :: header}"></div>
+
+<!-- Main content area (will be filled in Step 11) -->
+<main class="container py-5">
+
+    <h1 class="fw-light" th:text="${book.title}">Book Title</h1>
+
+    <p class="lead" th:text="${book.description}">
+        Book description goes here.
+    </p>
+
+    <p>
+        <strong>ISBN:</strong>
+        <span th:text="${book.isbn}"></span>
+    </p>
+
+    <p>
+        <strong>Number of Pages:</strong>
+        <span th:text="${book.numOfPages}"></span>
+    </p>
+
+    <p>
+        <strong>Authors:</strong>
+        <span th:each="author : ${book.authors}"
+              th:text="${author}"
+              class="me-2">
+        </span>
+    </p>
+
+    <a href="/" class="btn btn-secondary mt-3">Back to List</a>
+
+</main>
+
+
+<!-- Footer + scripts -->
+<div th:insert="~{fragments/footer :: footer}"></div>
+<div th:insert="~{fragments/scriptFooter :: scriptFooter}"></div>
+
+</body>
+</html>

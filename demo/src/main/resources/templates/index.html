@@ -19,23 +19,33 @@
 <div th:insert="~{fragments/header :: header}"></div>
 
 <!-- Main content -->
-<main>
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
+<main class="container py-5">
 
-                <h1 class="fw-light">Book Club</h1>
+    <h1 class="fw-light">Monthly Book Club</h1>
+    <p class="text-muted">Select a book to view its details.</p>
 
-                <p class="lead text-muted">
-                    Welcome to the Book Club app, your "one stop shop" for all of your book club needs.
-                    Below you will find a list of this month's top 10 favorite books.
-                    Select a book to see its details.
-                </p>
+    <div class="list-group">
 
+        <!-- Loop through the list of books -->
+        <div th:each="book : ${books}" class="list-group-item d-flex justify-content-between align-items-center">
+
+            <div>
+                <h5 th:text="${book.title}"></h5>
+                <p class="mb-1" th:text="${book.description}"></p>
+                <small th:text="'Pages: ' + ${book.numOfPages}"></small>
             </div>
+
+            <!-- Link to the detail page -->
+            <a th:href="@{/{id}(id=${book.isbn})}" class="btn btn-primary">
+                View
+            </a>
+
         </div>
-    </section>
+
+    </div>
+
 </main>
+
 
 <!-- Insert footer and script fragments -->
 <div th:insert="~{fragments/footer :: footer}"></div>

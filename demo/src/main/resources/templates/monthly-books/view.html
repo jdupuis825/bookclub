@@ -7,50 +7,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Book Details</title>
+    <title>Bookclub | Monthly Book Details</title>
 
-    <!-- Bootstrap CSS -->
+    <!--  Bootstrap StyleSheet CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
 </head>
 <body>
-
-<!-- Header fragment -->
 <div th:insert="~{fragments/header :: header}"></div>
 
-<!-- Main content area (will be filled in Step 11) -->
-<main class="container py-5">
+<div class="container py-5" style="width: 50%;">
 
-    <h1 class="fw-light" th:text="${book.title}">Book Title</h1>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Book of the month details</h1>
+        </div>
 
-    <p class="lead" th:text="${book.description}">
-        Book description goes here.
-    </p>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${book.getTitle()}"></h4>
 
-    <p>
-        <strong>ISBN:</strong>
-        <span th:text="${book.isbn}"></span>
-    </p>
+                    <div class="card-subtitle text-muted">
+                        Pages: <span th:text="${book.getNumOfPages()}"></span>
+                    </div>
 
-    <p>
-        <strong>Number of Pages:</strong>
-        <span th:text="${book.numOfPages}"></span>
-    </p>
+                    <br />
 
-    <p>
-        <strong>Authors:</strong>
-        <span th:each="author : ${book.authors}"
-              th:text="${author}"
-              class="me-2">
-        </span>
-    </p>
+                    <div class="card-text">
+                        <p>
+                            <strong>Description:</strong> <br /><span th:text="${book.getDescription()}"></span>
+                        </p>
+                        <strong>Authors:</strong>
+                        <ul th:each="author : ${book.getAuthors()}">
+                            <li th:text="${author}"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <a href="/" th:href="@{/}">Return to books</a>
+        </div>
+    </div>
+</div>
 
-    <a href="/" class="btn btn-secondary mt-3">Back to List</a>
-
-</main>
-<!-- Footer + scripts -->
-<div th:insert="~{fragments/footer :: footer}"></div>
 <div th:insert="~{fragments/scriptFooter :: scriptFooter}"></div>
-
 </body>
 </html>

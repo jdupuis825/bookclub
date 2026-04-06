@@ -16,7 +16,10 @@
 <body>
 
 <!-- Insert the shared header fragment -->
-<div th:insert="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
 
 <!-- Main About Us content -->
 <main class="container py-5" style="max-width: 800px;">
@@ -66,7 +69,8 @@
 
 <!-- Insert shared footer and script fragments -->
 <div th:insert="~{fragments/footer :: footer}"></div>
-<div th:insert="~{fragments/scriptFooter :: scriptFooter}"></div>
+<div th:replace="fragments/scriptFooter :: scriptFooter"></div>
+
 
 </body>
 </html>

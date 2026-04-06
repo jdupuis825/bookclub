@@ -20,7 +20,9 @@
 <body>
 
 <!-- Header fragment -->
-<div th:insert="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header}"></div>
+
+
 
 <div class="container py-5" style="width: 50%;">
 
@@ -75,7 +77,8 @@
 </div>
 
 <!-- Script fragment -->
-<div th:insert="~{fragments/scriptFooter :: scriptFooter}"></div>
+<div th:replace="fragments/scriptFooter :: scriptFooter"></div>
+
 
 </body>
 </html>

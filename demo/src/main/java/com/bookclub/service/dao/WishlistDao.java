@@ -4,14 +4,12 @@
     Dupuis, J. (2025). CSI 505 Intermediate Java Programming. Bellevue University. Modified by A. Student 2025.
 */
 
-package com.bookclub.service;
+package com.bookclub.service.dao;
 
-import java.util.List;
 
-public interface GenericDao<E, K> {
+import com.bookclub.model.WishListItem;
 
-    List<E> list();   // Return a list of objects of type E
-
-    E find(K key);    // Return an object of type E by key of type K
+public interface WishlistDao extends GenericDao<WishListItem, String> {
 }
+
 

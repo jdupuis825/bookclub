@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+<div class="container mt-4">
+
+    <h1 class="mb-4">Wishlist</h1>
+
+    <!-- New Wishlist Item Button -->
+    <a class="btn btn-primary mb-3" th:href="@{/wishlist/new}">New Wishlist Item</a>
+
+    <!-- Wishlist Table -->
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="item : ${wishlist}">
+            <td th:text="${item.title}"></td>
+            <td th:text="${item.priority}"></td>
+
+            <td>
+                <a class="btn btn-sm btn-warning"
+                   th:href="@{'/wishlist/edit/' + ${item.id}}">
+                    Edit
+                </a>
+
+                <a class="btn btn-sm btn-danger"
+                   th:href="@{'/wishlist/delete/' + ${item.id}}">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head></head>
-<body>
+
 <!-- Header fragment containing a Bootstrap navbar -->
 <header th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container-fluid">
 
             <!-- Brand / Home link -->
             <a class="navbar-brand" href="/">BookClub</a>
@@ -32,10 +30,15 @@
                         <a class="nav-link" th:href="@{/contact}">Contact Us</a>
                     </li>
 
+                    <!-- Wishlist link -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/wishlist}">Wishlist</a>
+                    </li>
+
                 </ul>
             </div>
+
         </div>
     </nav>
 </header>
-</body>
-</html>
+

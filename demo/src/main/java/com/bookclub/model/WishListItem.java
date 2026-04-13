@@ -6,86 +6,58 @@
 
 package com.bookclub.model;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+
 public class WishListItem {
 
-    private int id;
-    private String name;
-    private String description;
-    private double price;
-    private boolean purchased;
-    private int ownerId;   // ID of the user who owns this wishlist item
+    @Id
+    private String id;
 
-    public WishListItem() {
-    }
+    @NotNull
+    @NotEmpty(message = "ISBN is a required field.")
+    private String isbn;
 
-    public WishListItem(int id, String name, String description, double price, boolean purchased, int ownerId) {
+    @NotNull
+    @NotEmpty(message = "Title is a required field.")
+    private String title;
+
+    public WishListItem() {}
+
+    public WishListItem(String id, String isbn, String title) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.purchased = purchased;
-        this.ownerId = ownerId;
+        this.isbn = isbn;
+        this.title = title;
     }
 
-    // Getters
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public boolean isPurchased() {
-        return purchased;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    // Setters
-    public void setId(int id) {
+    // *** This is the missing method that fixes your compiler error ***
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPurchased(boolean purchased) {
-        this.purchased = purchased;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
     public String toString() {
-        return "WishListItem{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", purchased=" + purchased +
-                ", ownerId=" + ownerId +
-                '}';
+        return String.format("WishlistItem{id=%s, isbn=%s, title=%s}", id, isbn, title);
     }
 }

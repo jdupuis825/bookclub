@@ -1,9 +1,8 @@
-
 <!-- Header fragment containing a Bootstrap navbar -->
 <header th:fragment="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <div class="container-fluid">
+        <div class="container-fluid">
 
             <!-- Brand / Home link -->
             <a class="navbar-brand" href="/">BookClub</a>
@@ -18,7 +17,9 @@
 
             <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+
+                <!-- LEFT SIDE LINKS -->
+                <ul class="navbar-nav me-auto">
 
                     <!-- About Us link -->
                     <li class="nav-item">
@@ -36,9 +37,23 @@
                     </li>
 
                 </ul>
+
+                <!-- CENTER: Logged in as -->
+                <div class="nav navbar-nav mx-auto">
+                    <div sec:authorize="isAuthenticated()">
+                        Logged in as <strong sec:authentication="name"></strong>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE: Logout -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="/logout" th:href="@{/logout}" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+
             </div>
 
         </div>
     </nav>
 </header>
-

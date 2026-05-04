@@ -18,41 +18,46 @@
             <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarNav">
 
-                <!-- LEFT SIDE LINKS -->
-                <ul class="navbar-nav me-auto">
+                <!-- LEFT SECTION -->
+                <div class="d-flex flex-grow-1">
+                    <ul class="navbar-nav">
+                        <!-- ABOUT US SECTION -->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/about}">About Us</a>
+                        </li>
+                        <!-- CONTACT US SECTION -->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/contact}">Contact Us</a>
+                        </li>
+                        <!-- WISHLIST SECTION -->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/wishlist}">Wishlist</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <!-- About Us link -->
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/about}">About Us</a>
-                    </li>
-
-                    <!-- Contact Us link -->
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/contact}">Contact Us</a>
-                    </li>
-
-                    <!-- Wishlist link -->
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/wishlist}">Wishlist</a>
-                    </li>
-
-                </ul>
-
-                <!-- CENTER: Logged in as -->
-                <div class="nav navbar-nav mx-auto">
-                    <div sec:authorize="isAuthenticated()">
+                <!-- CENTER SECTION -->
+                <div class="d-flex flex-grow-1 justify-content-center">
+                    <div sec:authorize="isAuthenticated()" class="navbar-text text-white">
                         Logged in as <strong sec:authentication="name"></strong>
                     </div>
                 </div>
 
-                <!-- RIGHT SIDE: Logout -->
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="/logout" th:href="@{/logout}" class="nav-link">Logout</a>
-                    </li>
-                </ul>
+                <!-- RIGHT SECTION -->
+                <div class="d-flex flex-grow-1 justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="/logout" th:href="@{/logout}" class="nav-link">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/swagger-ui.html" class="nav-link" target="_blank">OpenAPI Specification</a>
+                        </li>
+
+                    </ul>
+                </div>
 
             </div>
+
 
         </div>
     </nav>

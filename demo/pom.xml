@@ -70,11 +70,16 @@
 		<!-- Thymeleaf security -->
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-			<version>3.1.1.RELEASE</version>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
 		</dependency>
 
 
+		<!-- OpenAPI / Swagger UI for Spring Boot 3 -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.5.0</version>
+		</dependency>
 
 
 	</dependencies>

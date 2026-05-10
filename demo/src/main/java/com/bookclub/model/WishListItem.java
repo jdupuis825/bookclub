@@ -23,6 +23,8 @@ public class WishListItem {
     @NotEmpty(message = "Title is a required field.")
     private String title;
 
+    private String username;   // ← REQUIRED FIELD
+
     public WishListItem() {}
 
     public WishListItem(String id, String isbn, String title) {
@@ -35,7 +37,6 @@ public class WishListItem {
         return id;
     }
 
-    // *** This is the missing method that fixes your compiler error ***
     public void setId(String id) {
         this.id = id;
     }
@@ -56,8 +57,17 @@ public class WishListItem {
         this.title = title;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
-        return String.format("WishlistItem{id=%s, isbn=%s, title=%s}", id, isbn, title);
+        return String.format("WishlistItem{id=%s, isbn=%s, title=%s, username=%s}",
+                id, isbn, title, username);
     }
 }

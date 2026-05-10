@@ -7,42 +7,69 @@
 </head>
 
 <body>
-<div class="container mt-4">
+<div class="py-5 container" style="width: 50%;">
+    <h2 class="text-center">My Wishlist</h2>
+    <br />
 
-    <h1 class="mb-4">My Wishlist</h1>
+    <p class="text-center">
+        <a href="/wishlist/new" th:href="@{/wishlist/new}"
+           class="btn btn-outline-secondary text-center">
+            New Wishlist Item
+        </a>
+    </p>
 
-    <a class="btn btn-primary mb-3" th:href="@{/wishlist/new}">
-        New Wishlist Item
-    </a>
-
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-        <tr>
-            <th>ISBN</th>
-            <th>Title</th>
-            <th>Functions</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="item : ${wishlist}">
-            <td th:text="${item.isbn}"></td>
-            <td th:text="${item.title}"></td>
-            <td>
-                <a class="btn btn-sm btn-warning"
-                   th:href="@{'/wishlist/edit/' + ${item.id}}">
-                    Edit
-                </a>
-
-                <a class="btn btn-sm btn-danger"
-                   th:href="@{'/wishlist/delete/' + ${item.id}}">
-                    Delete
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
+    <!-- Placeholder where JS will inject the table -->
+    <div id="wishlist"></div>
 </div>
+
+<script>
+    // HttpClient class (Step 6)
+    class HttpClient {
+        async get(url, params = "") {
+            url = new URL(url);
+            url.search = new URLSearchParams(params).toString();
+
+            console.log(url.toString());
+
+            const res = await fetch(url.toString(), {
+                method: 'GET',
+            });
+
+            return res.json();
+        }
+    }
+
+    // buildTable function (Step 6)
+    function buildTable(books) {
+        let tableString = '<table class="table table-striped table-bordered">';
+        tableString += '<thead class="table-dark"><tr><th>ISBN</th><th>Title</th><th>Functions</th></tr></thead>';
+
+        for (let book of books) {
+            tableString += `
+                <tr>
+                    <td>${book.isbn}</td>
+                    <td>${book.title}</td>
+                    <td>
+                        <a href="/wishlist/edit/${book.id}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/wishlist/delete/${book.id}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>`;
+        }
+
+        tableString += '</table>';
+        return tableString;
+    }
+
+    // API call to load wishlist (Step 6)
+    const http = new HttpClient();
+
+    http.get('http://localhost:8080/api/wishlist')
+        .then(res => {
+            console.log(res);
+            document.getElementById("wishlist").innerHTML = buildTable(res);
+        })
+        .catch(e => console.log(e));
+</script>
+
 </body>
 </html>

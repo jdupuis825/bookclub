@@ -1,7 +1,7 @@
 package com.bookclub.web;
 
-import com.bookclub.service.dao.WishlistDao;
 import com.bookclub.model.WishListItem;
+import com.bookclub.repository.WishListItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,23 +12,22 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class WishlistRestController {
 
-    private WishlistDao wishlistDao;
-
     @Autowired
-    public void setWishlistDao(WishlistDao wishlistDao) {
-        this.wishlistDao = wishlistDao;
-    }
+    private WishListItemRepository repository;
 
-    @RequestMapping(method = RequestMethod.GET)
+    // GET all items
+    @GetMapping
     public List<WishListItem> showWishlist() {
-        return wishlistDao.list();
+        return repository.findAll();
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    // GET item by ID
+    @GetMapping("/{id}")
     public WishListItem findById(@PathVariable String id) {
-        return wishlistDao.find(id);
+        return repository.findById(id).orElse(null);
     }
 }
+
 
 
 

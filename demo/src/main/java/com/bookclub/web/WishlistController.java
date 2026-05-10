@@ -7,7 +7,7 @@
 package com.bookclub.web;
 
 import com.bookclub.model.WishListItem;
-import com.bookclub.service.dao.WishlistDao;
+import com.bookclub.repository.WishListItemRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,17 +19,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/wishlist")
 public class WishlistController {
 
-    private WishlistDao wishlistDao;
-
     @Autowired
-    private void setWishlistDao(WishlistDao wishlistDao) {
-        this.wishlistDao = wishlistDao;
-    }
+    private WishListItemRepository repository;
 
-    // LIST PAGE
+    // LIST PAGE (Assignment Step 5 requirement)
     @GetMapping
-    public String showWishList(Model model) {
-        model.addAttribute("wishlist", wishlistDao.list());
+    public String showWishList() {
         return "wishlist/list";
     }
 
@@ -50,14 +45,14 @@ public class WishlistController {
             return "wishlist/new";
         }
 
-        wishlistDao.add(wishListItem);
+        repository.save(wishListItem);
         return "redirect:/wishlist";
     }
 
     // EDIT FORM
     @GetMapping("/edit/{id}")
     public String editWishListItem(@PathVariable("id") String id, Model model) {
-        WishListItem item = wishlistDao.find(id);
+        WishListItem item = repository.findById(id).orElse(null);
         model.addAttribute("wishListItem", item);
         return "wishlist/edit";
     }
@@ -74,7 +69,7 @@ public class WishlistController {
         }
 
         wishListItem.setId(id);
-        wishlistDao.update(wishListItem);
+        repository.save(wishListItem);
 
         return "redirect:/wishlist";
     }
@@ -82,8 +77,7 @@ public class WishlistController {
     // DELETE ITEM
     @GetMapping("/delete/{id}")
     public String deleteWishListItem(@PathVariable("id") String id) {
-        WishListItem item = wishlistDao.find(id);
-        wishlistDao.remove(item);
+        repository.deleteById(id);
         return "redirect:/wishlist";
     }
 }

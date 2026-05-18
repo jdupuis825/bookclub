@@ -16,7 +16,9 @@ import java.util.List;
 
 public class RestBookDao implements BookDao {
 
-    // --- Step 4b: getBooksDoc() ---
+    // ------------------------------------------------------------
+    // FETCH RAW JSON FROM OPENLIBRARY
+    // ------------------------------------------------------------
     public Object getBooksDoc(String isbnString) {
 
         String openLibraryUrl = "https://openlibrary.org/api/books";
@@ -45,7 +47,36 @@ public class RestBookDao implements BookDao {
         return Configuration.defaultConfiguration().jsonProvider().parse(jsonBookList);
     }
 
-    // --- Step 4c: list() ---
+    // ------------------------------------------------------------
+    // STEP 8: UPDATED list(String key) — USED BY HOMEPAGE
+    // ------------------------------------------------------------
+    @Override
+    public List<Book> list(String key) {
+
+        Object doc = getBooksDoc(key);
+
+        List<Book> books = new ArrayList<>();
+
+        List<String> titles = JsonPath.read(doc, "$..details.title");
+        List<String> isbns = JsonPath.read(doc, "$..bib_key");
+        List<String> infoURLs = JsonPath.read(doc, "$..info_url");
+
+        for (int i = 0; i < titles.size(); i++) {
+            books.add(new Book(
+                    isbns.get(i),
+                    titles.get(i),
+                    "N/A",
+                    infoURLs.get(i),
+                    0
+            ));
+        }
+
+        return books;
+    }
+
+    // ------------------------------------------------------------
+    // ORIGINAL list() — USED BY MONTHLY BOOKS PAGE (STATIC LIST)
+    // ------------------------------------------------------------
     @Override
     public List<Book> list() {
 
@@ -91,7 +122,9 @@ public class RestBookDao implements BookDao {
         return books;
     }
 
-    // --- Step 4d: find() ---
+    // ------------------------------------------------------------
+    // FIND A SINGLE BOOK BY ISBN
+    // ------------------------------------------------------------
     @Override
     public Book find(String key) {
 
@@ -112,7 +145,9 @@ public class RestBookDao implements BookDao {
         return new Book(isbn, title, desc, infoUrl, numOfPages);
     }
 
-    // --- Unused CRUD methods ---
+    // ------------------------------------------------------------
+    // UNUSED CRUD METHODS
+    // ------------------------------------------------------------
     @Override
     public void add(Book entity) { }
 

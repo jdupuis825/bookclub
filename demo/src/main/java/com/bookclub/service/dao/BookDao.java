@@ -7,8 +7,16 @@
 package com.bookclub.service.dao;
 
 import com.bookclub.model.Book;
+import java.util.List;
 
 public interface BookDao extends GenericDao<Book, String> {
+
+    // Required for RestBookDao.list(String key)
+    List<Book> list(String key);
+
+    // Already required by GenericDao, but we explicitly declare find()
+    Book find(String key);
 }
+
 
 

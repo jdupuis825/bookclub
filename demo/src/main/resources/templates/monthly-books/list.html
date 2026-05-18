@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Monthly Books</title>
+</head>
+<body>
+
+<h1>Books of the Month</h1>
+
+<a href="/monthly-books/new">Add New Monthly Book</a>
+
+<table border="1">
+    <tr>
+        <th>Month</th>
+        <th>ISBN</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="book : ${books}">
+        <td th:text="${book.month}"></td>
+        <td th:text="${book.isbn}"></td>
+        <td>
+            <a th:href="@{'/monthly-books/remove/' + ${book.id}}">Remove</a>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

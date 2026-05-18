@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Monthly Book</title>
+</head>
+<body>
+
+<h1>Add Book of the Month</h1>
+
+<form th:action="@{/monthly-books/new}" th:object="${bookOfTheMonth}" method="post">
+
+    <label>Month:</label>
+    <select th:field="*{month}">
+        <option th:each="m : ${months}"
+                th:value="${m.key}"
+                th:text="${m.value}">
+        </option>
+    </select>
+    <br><br>
+
+    <label>ISBN:</label>
+    <input type="text" th:field="*{isbn}" />
+    <br><br>
+
+    <button type="submit">Save</button>
+
+</form>
+
+</body>
+</html>

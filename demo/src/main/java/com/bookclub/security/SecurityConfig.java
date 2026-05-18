@@ -34,8 +34,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/about", "/contact", "/id/**").permitAll()
+                        .requestMatchers("/monthly-books/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -43,11 +46,11 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login?logout=true")
-                        .invalidateHttpSession(true)
+                        .logoutSuccessUrl("/")
                         .permitAll()
                 );
 
         return http.build();
     }
+
 }
